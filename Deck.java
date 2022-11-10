@@ -47,9 +47,27 @@ public class Deck
      */
     public void shuffle() {
         // To be written
-        for (int i = 0; i < getDeckSize(); i++) {
+        int[] shuffleDeck = new int[getDeckSize()];
+        int rand = (int)(Math.random()*getDeckSize()) + 1; 
+        
+        for (int i = 0; i < cards.size(); i++) {
+            if (shuffleDeck[rand-1] == 0) {
+                shuffleDeck[rand-1] = cards.get(i).getRank();
+            } else {
+                while (shuffleDeck[rand-1] != 0) {
+                    rand = (int)(Math.random()*getDeckSize()) + 1; 
+                }
+                shuffleDeck[rand-1] = cards.get(i).getRank();
+            }   
+            rand = (int)(Math.random()*getDeckSize()) + 1; 
+        }
+            
+            
+        for (int i = 0; i < cards.size(); i++) {
+            //need to transfer the deck from shuffleDeck to the Deck arraylist
             
         }
+        
         
     }
     
