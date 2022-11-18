@@ -7,6 +7,9 @@
  */
 public class War
 {
+    Deck player1Deck;
+    Deck player2Deck;
+    Deck deck;
     /**
      * Constructor for the game
      * Include your initialization here -- card decks, shuffling, etc
@@ -15,10 +18,13 @@ public class War
     public War()
     {
         // Initializations here...
-        Deck deck = new Deck();
+        deck = new Deck();
         
         deck.initializeNewDeck();
-        
+        deck.shuffle();
+        Deck[] twoDecks = deck.dealDeck();
+        player1Deck = twoDecks[0];
+        player2Deck = twoDecks[1];
         
         // ...then run the event loop
         this.runEventLoop();
@@ -29,7 +35,16 @@ public class War
      * from the War flowchart you created for this game
      */
     public void runEventLoop() {
-
+        Card topCard1;
+        Card topCard2;
+        int turns = 1;
+        while (player1Deck.getDeckSize() > 0 && player2Deck.getDeckSize() > 0 && turns <= 300) {
+            
+            
+            
+        }
+        
+        
     }
     
     /**
@@ -37,6 +52,7 @@ public class War
      */
     public static void main(String[] args) {
         War war = new War();
+        
     }
 
 }

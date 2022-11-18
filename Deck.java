@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Math;
-
+import java.util.Collections; 
 
 /**
  * Emulate a deck of cards
@@ -47,28 +47,7 @@ public class Deck
      */
     public void shuffle() {
         // To be written
-        int[] shuffleDeck = new int[getDeckSize()];
-        int rand = (int)(Math.random()*getDeckSize()) + 1; 
-        
-        for (int i = 0; i < cards.size(); i++) {
-            if (shuffleDeck[rand-1] == 0) {
-                shuffleDeck[rand-1] = cards.get(i).getRank();
-            } else {
-                while (shuffleDeck[rand-1] != 0) {
-                    rand = (int)(Math.random()*getDeckSize()) + 1; 
-                }
-                shuffleDeck[rand-1] = cards.get(i).getRank();
-            }   
-            rand = (int)(Math.random()*getDeckSize()) + 1; 
-        }
-            
-            
-        for (int i = 0; i < cards.size(); i++) {
-            //need to transfer the deck from shuffleDeck to the Deck arraylist
-            
-        }
-        
-        
+        Collections.shuffle(cards);        
     }
     
     /**
@@ -94,7 +73,13 @@ public class Deck
      */
     public Card dealCardFromDeck() {
         // To be written 
-        return null;
+        Card topCard = cards.get(0);
+        for (int i = 1; i < cards.size()-1; i++) {
+            cards.set(i-1, cards.get(i));
+        }
+        cards.remove(cards.size()-1);
+        
+        return topCard;
     }
     
     /**
