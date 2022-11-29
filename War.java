@@ -7,6 +7,12 @@
  */
 public class War
 {
+    // need to write eventloop
+    
+    
+    
+    
+    
     Deck player1Deck;
     Deck player2Deck;
     Deck deck;
@@ -35,17 +41,31 @@ public class War
      * from the War flowchart you created for this game
      */
     public void runEventLoop() {
-        Card topCard1;
-        Card topCard2;
+        Card Card1;
+        Card Card2;
         int turns = 1;
         while (player1Deck.getDeckSize() > 0 && player2Deck.getDeckSize() > 0 && turns <= 300) {
+            Card1 = player1Deck.dealCardFromDeck(); 
+            Card2 = player2Deck.dealCardFromDeck(); 
             
+            if (Card1.getRank() > Card2.getRank()) {
+                player2Deck.addCardToDeck(Card1);
+            } else if (Card1.getRank() == Card2.getRank()) {
+                while(Card1.getRank() == Card2.getRank()) {
+                    
+                }
+            } else {
+                player1Deck.addCardToDeck(Card2);
+            }
             
             
         }
         
         
     }
+    
+    
+    
     
     /**
      * The main method is called when Java starts your program

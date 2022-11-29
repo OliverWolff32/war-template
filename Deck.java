@@ -88,6 +88,8 @@ public class Deck
      */
     public void addCardToDeck(Card cardToAdd) {
         // To be written
+        //adds to the bottom of the deck
+        cards.add(0, cardToAdd);
     }
     
 }
