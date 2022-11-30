@@ -80,6 +80,7 @@ public class Deck
         cards.remove(cards.size()-1);
         
         return topCard;
+        // top card is in index 0
     }
     
     /**
@@ -88,8 +89,14 @@ public class Deck
      */
     public void addCardToDeck(Card cardToAdd) {
         // To be written
-        //adds to the bottom of the deck
+        // adds to the top of the deck
         cards.add(0, cardToAdd);
     }
+    
+    public void addCardToBottomOfDeck(Card cardToAdd) {
+        //adds to the bottom of the deck
+        cards.add(cardToAdd);
+    }
+    
     
 }

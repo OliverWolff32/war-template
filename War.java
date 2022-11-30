@@ -9,7 +9,7 @@ public class War
 {
     // need to write eventloop
     
-    
+    //top card is in index0; bottom is the last index
     
     
     
@@ -41,21 +41,38 @@ public class War
      * from the War flowchart you created for this game
      */
     public void runEventLoop() {
-        Card Card1;
-        Card Card2;
+        Card card1;
+        Card card2;
+        
+        Deck war1 = new Deck();
+        Deck war2 = new Deck();
+        
         int turns = 1;
         while (player1Deck.getDeckSize() > 0 && player2Deck.getDeckSize() > 0 && turns <= 300) {
-            Card1 = player1Deck.dealCardFromDeck(); 
-            Card2 = player2Deck.dealCardFromDeck(); 
+            card1 = player1Deck.dealCardFromDeck(); 
+            card2 = player2Deck.dealCardFromDeck(); 
             
-            if (Card1.getRank() > Card2.getRank()) {
-                player2Deck.addCardToDeck(Card1);
-            } else if (Card1.getRank() == Card2.getRank()) {
-                while(Card1.getRank() == Card2.getRank()) {
-                    
+            if (card1.getRank() < card2.getRank()) {
+                player2Deck.addCardToBottomOfDeck(card1);
+                // player 2 wins war
+            } else if (card1.getRank() == card2.getRank()) {
+                // war occurs 
+                while(card1.getRank() == card2.getRank()) {
+                    if (player1Deck.getDeckSize() >= 4) {
+                        if(player2Deck.getDeckSize() >= 4) {
+                            for (int i = 0; i < 3; i++) {
+                                war1.addCardToDeck(player1Deck.dealCardFromDeck());
+                                war2.addCardToDeck(player2Deck.dealCardFromDeck());
+                            }
+                            card1 = player1Deck.dealCardFromDeck();
+                            card2 = player2Deck.dealCardFromDeck();
+                        }
+                    }
                 }
-            } else {
-                player1Deck.addCardToDeck(Card2);
+                
+            } else if (card1.getRank() > card2.getRank()) {
+                player1Deck.addCardToBottomOfDeck(card2);
+                //player 1 wins war
             }
             
             
