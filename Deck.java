@@ -94,7 +94,7 @@ public class Deck
     }
     
     public void addCardToBottomOfDeck(Card cardToAdd) {
-        //adds to the bottom of the deck
+        // adds to the bottom of the deck
         cards.add(cardToAdd);
     }
     
