@@ -12,7 +12,7 @@ import java.util.Collections;
 public class Deck
 {
     private List<Card> cards;
-
+    private List<Card> shuffledDeck;
     /**
      * Deck constructor: Create an empty deck of cards
      */
@@ -47,7 +47,16 @@ public class Deck
      */
     public void shuffle() {
         // To be written
-        Collections.shuffle(cards);        
+        shuffledDeck = new ArrayList();
+        int s = cards.size();
+        int i = 0;
+        while(i < s){
+            int r = (int)(Math.random() * s)+1;
+            shuffledDeck.add(cards.get(r-1));
+            cards.remove(r-1);
+            s--;
+        }
+        cards = shuffledDeck;        
     }
     
     /**
@@ -73,13 +82,17 @@ public class Deck
      */
     public Card dealCardFromDeck() {
         // To be written 
-        Card topCard = cards.get(0);
-        for (int i = 1; i < cards.size()-1; i++) {
-            cards.set(i-1, cards.get(i));
-        }
-        cards.remove(cards.size()-1);
+        if (getDeckSize() > 0) {
+            Card topCard = cards.get(0);
+            for (int i = 1; i < cards.size()-1; i++) {
+                cards.set(i-1, cards.get(i));
+            }
+            cards.remove(cards.size()-1);
         
-        return topCard;
+            return topCard;
+        }
+        return null;
+        
         // top card is in index 0
     }
     
