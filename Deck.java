@@ -47,16 +47,7 @@ public class Deck
      */
     public void shuffle() {
         // To be written
-        shuffledDeck = new ArrayList();
-        int s = cards.size();
-        int i = 0;
-        while(i < s){
-            int r = (int)(Math.random() * s)+1;
-            shuffledDeck.add(cards.get(r-1));
-            cards.remove(r-1);
-            s--;
-        }
-        cards = shuffledDeck;        
+        Collections.shuffle(cards);       
     }
     
     /**
@@ -82,16 +73,14 @@ public class Deck
      */
     public Card dealCardFromDeck() {
         // To be written 
-        if (getDeckSize() > 0) {
+        if (this.getDeckSize() > 0) {
             Card topCard = cards.get(0);
-            for (int i = 1; i < cards.size()-1; i++) {
-                cards.set(i-1, cards.get(i));
-            }
-            cards.remove(cards.size()-1);
+            cards.remove(0);
         
             return topCard;
         }
         return null;
+
         
         // top card is in index 0
     }
@@ -108,7 +97,7 @@ public class Deck
     
     public void addCardToBottomOfDeck(Card cardToAdd) {
         // adds to the bottom of the deck
-        cards.add(cardToAdd);
+        this.cards.add(cardToAdd);
     }
     
     
