@@ -34,19 +34,26 @@ public class War
         // ...then run the event loop
         this.runEventLoop(player1Deck, player2Deck);
     }
+    
+    public boolean winner() {
+        if (player1Deck.getDeckSize() == 0 || player2Deck.getDeckSize() == 0) {
+            return true; 
+        }
+        return false;
+    }
 
     public void war(Card card1, Card card2, Deck player1Deck, Deck player2Deck, int lengthOfWar) {
         
         
 
-        if (player1Deck.getDeckSize() >= 4 && player2Deck.getDeckSize() >= 4) {
+        if (winner() == false && player1Deck.getDeckSize() >= lengthOfWar && player2Deck.getDeckSize() >= lengthOfWar) {
             // both players have enough
-            System.out.println("Performing war with " + (lengthOfWar-1) + " cards. \n");
+            System.out.println("Performing war with " + (lengthOfWar+1) + " cards. \n");
             pot.addCardToDeck(card1);
             pot.addCardToDeck(card2);
             
-
-            for (int i = 0; i < lengthOfWar-1; i++) {
+            
+            for (int i = 0; i < (lengthOfWar-1); i++) {
                 pot.addCardToDeck(player1Deck.dealCardFromDeck());
                 pot.addCardToDeck(player2Deck.dealCardFromDeck());
             }
@@ -54,7 +61,7 @@ public class War
             card1 = player1Deck.dealCardFromDeck();
             card2 = player2Deck.dealCardFromDeck();
             
-            System.out.println("Player 1's card is a " + card1.getFace() + ". Player 2's card is a " + card2.getFace());
+            System.out.println("Player 1's card is a " + card1.getFace() + " of " + card1.getSuit() + ". Player 2's card is a " + card2.getFace() + " of " + card2.getSuit());
             
             pot.addCardToDeck(card1);
             pot.addCardToDeck(card2);
@@ -65,7 +72,7 @@ public class War
                     player1Deck.addCardToBottomOfDeck(pot.dealCardFromDeck());
                 }
                 
-                System.out.println("Player 1 wins the war! \n\n");
+                System.out.println("Player 1 wins the war and gets " + potSize + " cards.  \n\n");
 
             } else if (card1.getRank() < card2.getRank()) {
                 int potSize = pot.getDeckSize();
@@ -73,22 +80,22 @@ public class War
                     player2Deck.addCardToBottomOfDeck(pot.dealCardFromDeck());
                 }
                 
-                System.out.println("Player 2 wins the war! \n\n");
+                System.out.println("Player 2 wins the war and gets " + potSize + " cards. \n\n");
             } else { 
-                war(card1, card2, player1Deck, player2Deck, 3);
+                war(card1, card2, player1Deck, player2Deck, 4);
             }
 
         
         
-        } else if (player1Deck.getDeckSize() >= 4 && player2Deck.getDeckSize() < 4) {
+        } else if (winner() == false && player1Deck.getDeckSize() >= 4 && player2Deck.getDeckSize() < 4) {
             // player 1 has enough, player 2 doesn't
             war(card1, card2, player1Deck, player2Deck, player2Deck.getDeckSize());
 
-        } else if (player2Deck.getDeckSize() >= 4 && player1Deck.getDeckSize() < 4) {
+        } else if (winner() == false && player2Deck.getDeckSize() >= 4 && player1Deck.getDeckSize() < 4) {
             // player 2 has enough, player 1 doesn't
             war(card1, card2, player1Deck, player2Deck, player1Deck.getDeckSize());
 
-        } else {
+        } else if(winner() == false){
             // neither have enough
             if(player1Deck.getDeckSize() >= player2Deck.getDeckSize()) {
                 war(card1, card2, player1Deck, player2Deck, player2Deck.getDeckSize());
@@ -120,7 +127,7 @@ public class War
             card1 = player1Deck.dealCardFromDeck(); 
             card2 = player2Deck.dealCardFromDeck(); 
             
-            System.out.println("Player 1 shows a " + card1.getFace() + ". Player 2 shows a " + card2.getFace() + "\n");
+            System.out.println("Player 1 shows a " + card1.getFace() + " of " + card1.getSuit() +  ". Player 2 shows a " + card2.getFace() + " of " + card2.getSuit() + "\n");
                         
             if (card1.getRank() == card2.getRank()) {
                 war(card1, card2, player1Deck, player2Deck, 4);
@@ -129,7 +136,7 @@ public class War
                 player2Deck.addCardToBottomOfDeck(card1);
                 player2Deck.addCardToBottomOfDeck(card2);
                 // player 2 wins battle
-                System.out.println("Player 2 wins a battle with a " + card2.getFace() + " to player 1's " + card1.getFace());
+                System.out.println("Player 2 wins a battle with a " + card2.getFace() + " of " + card2.getSuit() + " to player 1's " + card1.getFace() + " of " + card1.getSuit());
             } else if (card1.getRank() > card2.getRank()) {
                 player1Deck.addCardToBottomOfDeck(card2);
                 player1Deck.addCardToBottomOfDeck(card1);
